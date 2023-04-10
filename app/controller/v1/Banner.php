@@ -3,6 +3,7 @@ namespace app\controller\v1;
 
 use app\BaseController;
 use app\validate\IdMustBePositiveInt;
+use app\model\Banner as BannerModel;
 
 class Banner extends BaseController
 {
@@ -11,5 +12,7 @@ class Banner extends BaseController
    */
   public function getBannerById($id) {
     (new IdMustBePositiveInt())->goCheck();
+    $banner = BannerModel::getBannerById($id);
+    return $banner;
   }
 }
