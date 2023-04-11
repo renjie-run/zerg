@@ -25,6 +25,9 @@ class ExceptionHandle extends Handle
             $this->msg = $e->msg;
             $this->err_code = $e->err_code;
         } else {
+            if (env('APP_DEBUG')) {
+                return parent::render($request, $e);
+            }
             $this->code = 500;
             $this->msg = 'internal server error';
             $this->err_code = 999;

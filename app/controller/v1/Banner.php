@@ -5,6 +5,7 @@ use app\BaseController;
 use app\exception\BannerMissingException;
 use app\validate\IdMustBePositiveInt;
 use app\model\Banner as BannerModel;
+use think\Exception;
 
 class Banner extends BaseController
 {
@@ -15,7 +16,7 @@ class Banner extends BaseController
     (new IdMustBePositiveInt())->goCheck();
     $banner = BannerModel::getBannerById($id);
     if (!$banner) {
-        throw new BannerMissingException();
+        throw new Exception(1/0);
     }
     return $banner;
   }
