@@ -2,11 +2,14 @@
 
 namespace app\validate;
 
-use think\Exception;
+use app\exception\ParameterException;
 use think\Validate;
 
 class BaseValid extends Validate
 {
+    /**
+     * @throws ParameterException
+     */
     public function goCheck()
     {
         // 获取参数
@@ -14,8 +17,9 @@ class BaseValid extends Validate
         // 验证参数
         $result = $this->check($params);
         if (!$result) {
-            $err = $this->error;
-            throw new Exception($err);
+            $e = new ParameterException();
+            $e->msg = $this->error;
+            throw $e;
         }
         return true;
     }
