@@ -15,10 +15,11 @@ class BaseValid extends Validate
         // 获取参数
         $params = request()->param();
         // 验证参数
-        $result = $this->check($params);
+        $result = $this->batch()->check($params);
         if (!$result) {
-            $e = new ParameterException();
-            $e->msg = $this->error;
+            $e = new ParameterException([
+                'msg' => $this->error,
+            ]);
             throw $e;
         }
         return true;

@@ -3,7 +3,6 @@
 namespace app\exception;
 
 use think\exception\Handle;
-use think\facade\Log;
 use think\facade\Request;
 use think\Response;
 use Throwable;
