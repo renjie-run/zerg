@@ -17,6 +17,6 @@ class Banner extends BaseController
     if (!$banner) {
         throw new BannerMissingException();
     }
-    return $banner;
+    return json($banner);
   }
 }

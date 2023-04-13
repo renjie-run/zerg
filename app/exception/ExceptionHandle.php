@@ -2,7 +2,10 @@
 
 namespace app\exception;
 
+use think\db\exception\ModelNotFoundException;
 use think\exception\Handle;
+use think\exception\HttpException;
+use think\exception\HttpResponseException;
 use think\facade\Request;
 use think\Response;
 use Throwable;
@@ -11,6 +14,9 @@ class ExceptionHandle extends Handle
 {
     protected $ignoreReport = [
         BaseException::class,
+        HttpException::class,
+        HttpResponseException::class,
+        ModelNotFoundException::class,
     ];
 
     private $code;
