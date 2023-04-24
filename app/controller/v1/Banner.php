@@ -13,7 +13,7 @@ class Banner extends BaseController
    */
   public function getBannerById($id) {
     (new IdMustBePositiveInt())->goCheck();
-    $banner = BannerModel::getBannerById($id);
+    $banner = (new BannerModel())->getBannerById($id);
     if (!$banner) {
         throw new BannerMissingException();
     }
