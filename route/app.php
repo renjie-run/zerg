@@ -10,4 +10,4 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::get('api/v1/banner/:id', 'v1.banner/getBannerById');
+Route::get('api/:version/banner/:id', ':version.banner/getBannerById');
