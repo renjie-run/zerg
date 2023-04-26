@@ -2,10 +2,7 @@
 
 namespace app\model;
 
-use think\facade\Db;
-use think\Model;
-
-class Banner extends Model
+class Banner extends BaseModel
 {
     protected $hidden = [
         'delete_time', 'update_time'
