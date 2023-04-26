@@ -10,4 +10,11 @@ class Image extends Model
         'delete_time', 'update_time', 'from'
     ];
 
+    public function getUrlAttr($value, $data) {
+        if ($data['from'] === 1) {
+            return config('setting.img_prefix').$value;
+        }
+        return $value;
+    }
+
 }
