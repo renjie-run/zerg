@@ -10,6 +10,10 @@ class Banner extends BaseController
 {
   /**
    * 根据 id 获取 Banner
+   * @HTTP GET
+   * @url /banner/:id
+   * @param $id 目标 banner id
+   * @return banner
    */
   public function getBannerById($id) {
     (new IdMustBePositiveInt())->goCheck();
