@@ -13,7 +13,7 @@ class Banner extends BaseController
    * @HTTP GET
    * @url /banner/:id
    * @param $id 目标 banner id
-   * @return banner
+   * @return \think\response\Json: banner
    */
   public function getBannerById($id) {
     (new IdMustBePositiveInt())->goCheck();
