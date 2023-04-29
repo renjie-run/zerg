@@ -27,4 +27,9 @@ class Theme extends BaseController
         }
         return json($themes);
     }
+
+    public function getThemeProducts($id)
+    {
+        return json('success');
+    }
 }
