@@ -3,9 +3,10 @@
 namespace app\controller\v1;
 
 use app\BaseController;
-use app\exception\ThemeMissingException;
+use app\exception\ThemeException;
 use app\validate\IdCollection;
 use app\model\Theme as ThemeModel;
+use app\validate\IdMustBePositiveInt;
 
 class Theme extends BaseController
 {
@@ -23,13 +24,18 @@ class Theme extends BaseController
         $ids = explode(',', $ids);
         $themes = ThemeModel::with([ 'topicImg', 'headImg' ])->select($ids);
         if ($themes->isEmpty()) {
-            throw new ThemeMissingException();
+            throw new ThemeException();
         }
         return json($themes);
     }
 
     public function getThemeProducts($id)
     {
-        return json('success');
+        (new IdMustBePositiveInt())->goCheck();
+        $themeProducts = (new ThemeModel())->getThemeProducts($id);
+        if (!$themeProducts) {
+            throw new ThemeException();
+        }
+        return json($themeProducts);
     }
 }

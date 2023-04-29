@@ -11,7 +11,7 @@ class Image extends BaseModel
     ];
 
     public function getUrlAttr($value, $data) {
-        return $this->prefixUrl($value, $data, 'image');
+        return $this->prefixImgUrl($value, $data);
     }
 
 }

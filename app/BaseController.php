@@ -91,4 +91,9 @@ abstract class BaseController
         return $v->failException(true)->check($data);
     }
 
+    protected function jsonReturn($data)
+    {
+        return json($data);
+    }
+
 }

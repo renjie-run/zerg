@@ -12,6 +12,9 @@ use think\facade\Route;
 
 Route::get('api/:version/banner/:id', ':version.banner/getBannerById');
 
+// theme
 Route::get('api/:version/theme', ':version.theme/getThemesByIds');
-
 Route::get('api/:version/theme/:id', ':version.theme/getThemeProducts');
+
+// product
+Route::get('api/:version/product/recent', ':version.product/getRecent');

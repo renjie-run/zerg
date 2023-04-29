@@ -3,5 +3,6 @@
 
 4xxxx banner 相关错误
 
-
-40000 未查找到 banner
+20000 product 不存在
+30000 theme   不存在
+40000 banner  不存在
