@@ -12,7 +12,7 @@ class Token extends BaseController
     public function getToken($code)
     {
         (new TokenGet())->goCheck();
-        $token = (new UserToken())->get();
-        return $this->jsonReturn($token);
+        $token = (new UserToken($code))->get();
+        return $this->jsonReturn($code);
     }
 }
