@@ -11,3 +11,7 @@
 - ORM：模型与关联模型
 
 ThinkPHP 6.0 开发手册：[https://www.kancloud.cn/manual/thinkphp6_0](https://www.kancloud.cn/manual/thinkphp6_0)
+
+### License
+
+Zerg is [MIT licensed](./LICENSE).
