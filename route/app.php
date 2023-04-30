@@ -22,3 +22,6 @@ Route::get('api/:version/product/by_category', ':version.product/getProductsByCa
 
 // category
 Route::get('api/:version/category/all', ':version.category/getAllCategories');
+
+// token
+Route::post('api/:version/token/user', ':version.token/getToken');
