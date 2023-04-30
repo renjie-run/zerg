@@ -21,6 +21,7 @@ class UserToken
     public function get()
     {
         $sResult = curl_get($this->wxLoginUrl);
+        $result = json_decode($sResult, true);
         return 'token';
     }
 
