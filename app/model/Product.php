@@ -8,6 +8,16 @@ class Product extends BaseModel
         'create_time', 'update_time', 'pivot', 'delete_time', 'from',
     ];
 
+    public function imgs()
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'id');
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(ProductProperty::class, 'product_id', 'id');
+    }
+
     public function getMainImgUrlAttr($value, $data) {
         return $this->prefixImgUrl($value, $data);
     }
@@ -21,6 +31,11 @@ class Product extends BaseModel
     public function getProductsByCategories($categoryId)
     {
         return self::where('category_id', '=', $categoryId)->select();
+    }
+
+    public function getProductById($id)
+    {
+        return self::with([ 'imgs', 'imgs.img', 'properties' ])->find($id);
     }
 
 }
