@@ -4,6 +4,7 @@ namespace app\service;
 
 use app\exception\WechatException;
 use think\Exception;
+use app\model\User as UserModel;
 
 class UserToken
 {
@@ -31,7 +32,35 @@ class UserToken
         if (array_key_exists('errcode', $wxResult)) {
             $this->processWxException($wxResult);
         }
+        $uid = $this->grantToken($wxResult);
         return 'token';
+    }
+
+    private function grantToken($wxResult)
+    {
+        // 获得 openid
+        $opendid = $wxResult['openid'];
+
+        // 根据 openid 查看 User 表中是否存在对应的记录
+        // 如果存在则不处理，不存在则需要在 User 表中插入一条新的记录
+        $user = (new UserModel())->getUserByOpenid($opendid);
+        if (!$user) {
+            $uid = $user->id;
+        } else {
+            $user = $this->newUser($opendid);
+            $uid = $user->id;
+        }
+
+        // 生成令牌
+        // 准备缓存数据，写入缓存
+        // 将令牌返回给客户端
+    }
+
+    private function newUser($openid)
+    {
+        return UserModel::create([
+            'openid' => $openid,
+        ]);
     }
 
     private function processWxException($wxResult)
