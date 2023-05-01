@@ -7,7 +7,7 @@ class User extends BaseModel
 
     public function getUserByOpenid($openid)
     {
-        return self::where('openid', '=', $openid);
+        return self::where('openid', '=', $openid)->find();
     }
 
 }

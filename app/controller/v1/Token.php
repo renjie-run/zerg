@@ -3,6 +3,7 @@
 namespace app\controller\v1;
 
 use app\BaseController;
+use app\exception\TokenException;
 use app\service\UserToken;
 use app\validate\TokenGet;
 
@@ -13,6 +14,11 @@ class Token extends BaseController
     {
         (new TokenGet())->goCheck();
         $token = (new UserToken($code))->get();
-        return $this->jsonReturn($code);
+        if (!$token) {
+            throw new TokenException();
+        }
+        return $this->jsonReturn([
+            'token' => $token,
+        ]);
     }
 }
