@@ -29,4 +29,14 @@ class Product extends BaseController
         }
         return $this->jsonReturn($products);
     }
+
+    public function getProductById($id)
+    {
+        (new IdMustBePositiveInt())->goCheck();
+        $product = (new ProductModel())->getProductById($id);
+        if (!$product) {
+            throw new ProductException();
+        }
+        return $this->jsonReturn($product);
+    }
 }
