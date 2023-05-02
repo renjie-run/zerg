@@ -40,4 +40,13 @@ class BaseValid extends Validate
         }
         return true;
     }
+
+    protected function getDataByRule($input)
+    {
+        $data = [];
+        foreach ($this->rule as $key => $value) {
+            $data[$key] = $input[$key];
+        }
+        return $data;
+    }
 }
