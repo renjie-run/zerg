@@ -29,4 +29,7 @@ Route::get('api/:version/category/all', ':version.category/getAllCategories');
 Route::post('api/:version/token/user', ':version.token/getToken');
 
 // address
-Route::post('api/:version/address', ':version.address/createOrUpdateAddress');
+Route::post('api/:version/address', ':version.address/createOrUpdateAddress')
+    ->middleware([
+        app\middleware\CheckPrimaryScope::class,
+    ]);
