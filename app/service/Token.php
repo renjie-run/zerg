@@ -2,6 +2,8 @@
 
 namespace app\service;
 
+use app\enum\ScopeEnum;
+use app\exception\ForbiddenException;
 use app\exception\TokenException;
 use think\Exception;
 use think\facade\Cache;
@@ -44,5 +46,29 @@ class Token
     public static function getCurrentUid()
     {
         return self::getCurrentTokenVar('uid');
+    }
+
+    public static function checkPrimaryScope()
+    {
+        $scope = self::getCurrentTokenVar('scope');
+        if (empty($scope)) {
+            throw new TokenException();
+        }
+        if ($scope < ScopeEnum::User) {
+            throw new ForbiddenException();
+        }
+        return true;
+    }
+
+    public static function checkExclusiveScope()
+    {
+        $scope = self::getCurrentTokenVar('scope');
+        if (empty($scope)) {
+            throw new TokenException();
+        }
+        if ($scope == ScopeEnum::User) {
+            throw new ForbiddenException();
+        }
+        return true;
     }
 }

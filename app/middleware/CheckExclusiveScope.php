@@ -3,24 +3,20 @@ declare (strict_types = 1);
 
 namespace app\middleware;
 
-use app\exception\ForbiddenException;
-use app\exception\TokenException;
 use app\service\Token as TokenService;
 
-class CheckPrimaryScope
+class CheckExclusiveScope
 {
     /**
      * 处理请求
      *
      * @param \think\Request $request
-     * @param \Closure $next
+     * @param \Closure       $next
      * @return Response
-     * @throws ForbiddenException
-     * @throws TokenException
      */
     public function handle($request, \Closure $next)
     {
-        TokenService::checkPrimaryScope();
+        TokenService::checkExclusiveScope();
         return $next($request);
     }
 }

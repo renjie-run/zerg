@@ -33,3 +33,9 @@ Route::post('api/:version/address', ':version.address/createOrUpdateAddress')
     ->middleware([
         app\middleware\CheckPrimaryScope::class,
     ]);
+
+// order
+Route::post('api/:version/order', ':version.order/placeOrder')
+    ->middleware([
+        app\middleware\CheckExclusiveScope::class,
+    ]);
