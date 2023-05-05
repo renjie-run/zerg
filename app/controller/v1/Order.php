@@ -3,6 +3,9 @@
 namespace app\controller\v1;
 
 use app\BaseController;
+use app\validate\OrderPlace;
+use app\service\Order as OrderService;
+use app\service\Token as TokenService;
 
 class Order extends BaseController
 {
@@ -15,7 +18,11 @@ class Order extends BaseController
         // 服务器中调用微信支付进行支付
         // 微信返回支付结果（异步）
         // 支付成功后进行库存量检测、然后减去库存
-
-        return 'order';
+        (new OrderPlace())->goCheck();
+        $orderService = new OrderService();
+        $products = input('post.products/a');
+        $uid = TokenService::getCurrentUid();
+        $status = $orderService->place($uid, $products);
+        return $this->jsonReturn($status);
     }
 }
