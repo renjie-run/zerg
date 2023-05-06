@@ -98,7 +98,7 @@ class Order
 
     private function getUserAddress()
     {
-        return UserAddressModel::where('user_id', '=', $this->uid)->toArray();
+        return UserAddressModel::where('user_id', '=', $this->uid)->select()->toArray();
     }
 
     private function getOrderStatus()
@@ -149,7 +149,7 @@ class Order
             $pStatus['name'] = $product['name'];
             $pStatus['count'] = $oCount;
             $pStatus['totalPrice'] = $product['price'] * $oCount;
-            if ($product['stack'] - $oCount >= 0) {
+            if ($product['stock'] - $oCount >= 0) {
                 $pStatus['haveStock'] = true;
             }
             return $pStatus;
