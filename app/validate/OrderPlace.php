@@ -23,7 +23,7 @@ class OrderPlace extends BaseValid
 
     protected function checkProducts($values)
     {
-        if (is_array($values)) {
+        if (!is_array($values)) {
             throw new ParameterException([
                 'msg' => '商品参数格式异常，要求是数组',
             ]);
@@ -36,6 +36,7 @@ class OrderPlace extends BaseValid
         foreach ($values as $value) {
             $this->checkProduct($value);
         }
+        return true;
     }
 
     protected function checkProduct($value)

@@ -66,7 +66,7 @@ class Token
         if (empty($scope)) {
             throw new TokenException();
         }
-        if ($scope == ScopeEnum::User) {
+        if ($scope != ScopeEnum::User) {
             throw new ForbiddenException();
         }
         return true;
