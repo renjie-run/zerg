@@ -8,6 +8,7 @@ use app\model\UserAddress as UserAddressModel;
 use app\model\Order as OrderModel;
 use app\model\OrderProduct as OrderProductModel;
 use think\Exception;
+use think\facade\Db;
 
 class Order
 {
@@ -33,6 +34,7 @@ class Order
 
     private function createOrder($snap)
     {
+        Db::startTrans();
         try {
             $orderNo = $this->makeOrderNo();
             $order = new OrderModel();
@@ -55,12 +57,14 @@ class Order
             $orderProduct = new OrderProductModel();
             $orderProduct->saveAll($this->oProducts);
 
+            Db::commit();
             return [
                 'order_no' => $orderNo,
                 'order_id' => $orderId,
                 'create_time' => $createTime,
             ];
         } catch (\Exception $ex) {
+            Db::rollback();
             throw new Exception($ex);
         }
     }
