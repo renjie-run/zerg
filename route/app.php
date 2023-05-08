@@ -39,3 +39,7 @@ Route::post('api/:version/order', ':version.order/placeOrder')
     ->middleware([
         app\middleware\CheckExclusiveScope::class,
     ]);
+Route::post('api/:version/pay/pre_order', ':version.pay/getPreOrder')
+    ->middleware([
+        app\middleware\CheckExclusiveScope::class,
+    ]);

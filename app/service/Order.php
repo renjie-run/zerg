@@ -105,6 +105,14 @@ class Order
         return UserAddressModel::where('user_id', '=', $this->uid)->select()->toArray();
     }
 
+    public function checkOrderStock($orderId)
+    {
+        $oProducts = OrderProductModel::where('order_id', '=', $orderId)->select();
+        $this->oProducts = $oProducts;
+        $this->products = $this->getProductsByOrder($oProducts);
+        return $this->getOrderStatus();
+    }
+
     private function getOrderStatus()
     {
         $status = [
