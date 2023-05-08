@@ -71,4 +71,13 @@ class Token
         }
         return true;
     }
+
+    public static function isValidOperate($checkedUid)
+    {
+        if (!$checkedUid) {
+            throw new Exception('所要检验的 UID 不能为空');
+        }
+        $currentUid = self::getCurrentUid();
+        return $checkedUid == $currentUid;
+    }
 }
