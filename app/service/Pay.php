@@ -37,6 +37,11 @@ class Pay
         // TODO:
     }
 
+    private function makeWxPreOrder()
+    {
+
+    }
+
     public function checkOrderValid()
     {
         $order = OrderModel::where('id', '=', $this->orderId)->find();
